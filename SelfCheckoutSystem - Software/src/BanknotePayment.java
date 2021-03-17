@@ -48,13 +48,13 @@ public class BanknotePayment {
 			System.out.println("Disabled Exception");
 		}
 
-		if(bnps.getInserted()) {
+		if(bnps.getInserted())
 			System.out.println("Banknote insertion successful");
-			bnps.toggleInserted();
-		}
-		else {
+		else
 			System.out.println("Banknote insertion unsuccessful");
-		}
+
+		bnps.toggleInserted();			//banknoteSlot is now empty
+
 
 		// Try to validate the banknote
 		try {
@@ -64,12 +64,13 @@ public class BanknotePayment {
 			System.out.println("Disabled Exception");
 		}
 
-		if(bnps.getValidation()) {
+		if(bnps.getValidation())
 			System.out.println("Banknote validation successful");
-			bnps.toggleValidation();
-		}
 		else
 			System.out.println("Banknote validation unsuccessful");
+
+		bnps.toggleValidation();		//bankNoteValidator now empty
+
 
 		// Try to store the banknote
 		try {
@@ -81,12 +82,12 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
-		if(bnps.getStore()) {
+		if(bnps.getStore())
 			System.out.println("Banknote storage successful");
-			bnps.toggleStored();
-		}
 		else
 			System.out.println("Banknote storage unsuccessful");
+
+		bnps.toggleStored();			// Banknote stored, reset store parameter.
 
 
 	}
