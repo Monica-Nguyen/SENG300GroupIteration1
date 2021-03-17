@@ -19,9 +19,9 @@ public class ScanItem {
     // We will make many different selfCheckoutStations?
     private SelfCheckoutStation station;
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
-    private Boolean flag = true;
+    private Boolean flag = false;
     private Barcode barcode;
-    private int scannerVariable;
+    private int scanDevice;
     List<Barcode> scannedItems = new ArrayList<>();
 
 
@@ -31,36 +31,46 @@ public class ScanItem {
         this.BarcodeScannerListener = bi;
 
         // There can be either a main scanner used or a handheld scanner used
-        // This flag usage is wrong.. bare with me haha
-
-        try {
+        try{
             station.mainScanner.register(BarcodeScannerListener);
-            station.handheldScanner.register(BarcodeScannerListener);
-        } catch(Exception e) {
-            flag = false;
-            System.out.println("A scanner could not be registered.\n");
+            scanDevice = 1;
         }
+        catch(Exception e){
+            System.out.println("Main scanner could not be registered");
+            station.handheldScanner.register(BarcodeScannerListener);
+            scanDevice = 2;
+        }
+
+
     }
 
-    public void scanningItem(BarcodedItem barcodedItem, Boolean flag){
+    public void scanningItem(BarcodedItem barcodedItem){
         if (barcodedItem == null){
             throw new SimulationException(new NullPointerException("barcode is null"));
         }
 
-        if(flag){ //&& state = 1){ // First we want to try scanning the item with the main scanner
+        if(scanDevice == 1){ //&& state = 1){ // First we want to try scanning the item with the main scanner
             station.mainScanner.scan(barcodedItem);
             barcode = barcodedItem.getBarcode();
             scannedItems.add(barcode);
+            flag = true;
 
         }
 
-        else{ // If not we can try the handheld scanner present in many checkouts
+        else if (scanDevice == 2){ // If not we can try the handheld scanner present in many checkouts
             station.handheldScanner.scan(barcodedItem);
+            barcode = barcodedItem.getBarcode();
+            scannedItems.add(barcode);
+            flag = true;
         }
     }
 
-    // I guess after a successful scan is where BagItem calls ScanItem?
-    // BagItem.
+    /*
+    if (flag){
+        // I guess after a successful scan is where BagItem calls ScanItem when the flag == true?
+    }
+
+    */
 
 
 

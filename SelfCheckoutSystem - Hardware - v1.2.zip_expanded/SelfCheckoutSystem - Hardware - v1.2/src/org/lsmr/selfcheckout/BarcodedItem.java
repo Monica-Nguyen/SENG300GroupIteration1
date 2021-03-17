@@ -12,7 +12,7 @@ public class BarcodedItem extends Item {
 	/**
 	 * Basic constructor.
 	 * 
-	 * @param kind
+	 * @param barcode // was kind
 	 *            The kind of product that this item is.
 	 * @param weightInGrams
 	 *            The weight of the item.
