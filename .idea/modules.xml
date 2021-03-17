@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/SENG300GroupIteration1.iml" filepath="$PROJECT_DIR$/.idea/SENG300GroupIteration1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SelfCheckoutSystem - Hardware - v1.2.zip_expanded/SelfCheckoutSystem - Hardware - v1.2.zip_expanded.iml" filepath="$PROJECT_DIR$/SelfCheckoutSystem - Hardware - v1.2.zip_expanded/SelfCheckoutSystem - Hardware - v1.2.zip_expanded.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SelfCheckoutSystem - Software/SelfCheckoutSystem - Software.iml" filepath="$PROJECT_DIR$/SelfCheckoutSystem - Software/SelfCheckoutSystem - Software.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SelfCheckoutSystem - Software - Test/SelfCheckoutSystem - Software - Test.iml" filepath="$PROJECT_DIR$/SelfCheckoutSystem - Software - Test/SelfCheckoutSystem - Software - Test.iml" />
+    </modules>
+  </component>
+</project>
