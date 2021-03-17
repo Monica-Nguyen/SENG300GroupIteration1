@@ -1,7 +1,7 @@
 package org.lsmr.selfcheckout;
 
 import org.lsmr.selfcheckout.devices.SimulationException;
-import org.lsmr.selfcheckout.products.Product;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
 
 /**
  * Represents items for sale, each with a particular barcode and weight.
@@ -12,7 +12,7 @@ public class BarcodedItem extends Item {
 	/**
 	 * Basic constructor.
 	 * 
-	 * @param kind
+	 * @param barcode // was kind
 	 *            The kind of product that this item is.
 	 * @param weightInGrams
 	 *            The weight of the item.
