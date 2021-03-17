@@ -1,71 +1,33 @@
-
-import org.lsmr.selfcheckout.Item;
-import org.lsmr.selfcheckout.devices.ElectronicScale;
-import org.lsmr.selfcheckout.Barcode;
-import org.lsmr.selfcheckout.BarcodedItem;
-
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
-import org.lsmr.selfcheckout.devices.listeners.BanknoteSlotListener;
-import org.lsmr.selfcheckout.devices.listeners.BanknoteValidatorListener;
-import org.lsmr.selfcheckout.devices.listeners.BanknoteStorageUnitListener;
-import org.lsmr.selfcheckout.devices.listeners.CoinStorageUnitListener;
-import org.lsmr.selfcheckout.devices.listeners.CoinSlotListener;
-import org.lsmr.selfcheckout.devices.listeners.CoinTrayListener;
-import org.lsmr.selfcheckout.devices.listeners.CoinValidatorListener;
-import org.lsmr.selfcheckout.devices.SimulationException;
+import java.math.BigDecimal;
+import java.util.Currency;
 
 public class Main {
 
-    private SelfCheckoutStation station;
     private ElectronicScaleListenerSoftware ElectronicScaleListener;
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
+    private BanknotePaymentSoftware BanknotePayment;
+    private CoinPaymentSoftware CoinPayment;
 
-    /*
-    private BanknoteSlotListenerSoftware BanknoteSlotListener;
-    private CoinSlotListenerSoftware CoinSlotListener;
-    private CoinStorageUnitListenerSoftware CoinStorageUnitListener;
-    private CoinTrayListenerSoftware CoinTrayListener;
-    private CoinValidatorListenerSoftware CoinValidatorListener;
-    private BanknoteSlotListenerSoftware BanknoteSlotListener;
-    private BanknoteStorageUnitListenerSoftware BanknoteStorageUnitListener;
-    private BanknoteValidatorListenerSoftware BanknoteValidatorListener;
-    */
+    Currency canadianDollars = Currency.getInstance("CAD");
+    BigDecimal nickel = new BigDecimal(0.05);
+    BigDecimal dime = new BigDecimal(.1);
+    BigDecimal quarter = new BigDecimal(.25);
+    BigDecimal loonie = new BigDecimal(1.00);
+    BigDecimal toonie = new BigDecimal(2.00);
+    BigDecimal[] coinDenominations = {nickel, dime, quarter, loonie, toonie};
+    int[] bankNoteDenominations = {5, 10, 20, 50, 100};
+    int scaleMaximumWeight = 100; // Assuming kilograms
+    int scaleSensitivity = 1; // In grams
 
-    //Am I correct to think that these have to be made too?
-
+    SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
+    ScanItem scanItem = new ScanItem(selfCheckoutStation, BarcodeScannerListener);
+    BagItem bagItem = new BagItem(selfCheckoutStation, ElectronicScaleListener);
+    BanknotePayment banknotePayment = new BanknotePayment(selfCheckoutStation, BanknotePayment);
+    //CoinPayment coinPayment = new CoinPayment(selfCheckoutStation, CoinPayment);
 
     public Main(SelfCheckoutStation s, ElectronicScaleListenerSoftware e, BarcodeScannerListenerSoftware bsl){
 
-        // CoinSlotListenerSoftware csl, CoinStorageUnitListenerSoftware csul, CoinTrayListenerSoftware ctl, CoinValidatorListenerSoftware cvl,
-        // BanknoteSlotListenerSoftware bsl, BanknoteStorageUnitListenerSoftware bsul, BanknoteValidatorListenerSoftware bvl){
-        this.station = s;
-        this.BarcodeScannerListener = bsl;
-        this.ElectronicScaleListener = e;
-
-        /*
-        this.CoinSlotListener = csl;
-        this.CoinStorageUnitListener = csul;
-        this.CoinTrayListener = ctl;
-        this.CoinValidatorListener = cvl;
-        this.BanknoteSlotListener = bnsl;
-        this.BanknoteStorageUnitListener = bnsul;
-        this.BanknoteValidatorListener = bnvl;
-        */
-
-        station.mainScanner.register(BarcodeScannerListener);
-        station.handheldScanner.register(BarcodeScannerListener);
-        station.baggingArea.register(ElectronicScaleListener);
-
-        /*
-        station.banknoteInput.register(BanknoteSlotListener);
-        station.banknoteValidator.register(BanknoteValidatorListener);
-        station.banknoteStorage.register(BanknoteStorageUnitListener);
-        station.coinSlot.register(CoinSlotListener);
-        station.coinValidator.register(CoinValidatorListener);
-        station.coinStorage.register(CoinStorageUnitListener);
-        station.coinTray.register(CoinTrayListener);
-
-         */
 
     }
 
