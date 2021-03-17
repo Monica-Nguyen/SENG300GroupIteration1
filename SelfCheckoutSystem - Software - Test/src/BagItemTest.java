@@ -1,4 +1,5 @@
-import org.junit.Test;
+
+import org.lsmr.selfcheckoutsoftware.BagItem;
 
 public class BagItemTest {
 

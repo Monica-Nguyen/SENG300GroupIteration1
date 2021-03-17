@@ -1,5 +1,4 @@
-
-
+package org.lsmr.selfcheckoutsoftware;
 
 
 import org.lsmr.selfcheckout.Coin;

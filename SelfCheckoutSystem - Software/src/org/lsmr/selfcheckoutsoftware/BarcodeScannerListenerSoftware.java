@@ -1,3 +1,5 @@
+package org.lsmr.selfcheckoutsoftware;
+
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.Item;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
