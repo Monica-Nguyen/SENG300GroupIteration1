@@ -29,11 +29,7 @@ public class BagItem {
 			station.baggingArea.add(item);
 			double newWeight = electListen.getPrevWeight();
 			double checkWeight = newWeight - oldWeight;
-			if ((checkWeight != item.getWeight()) && (oldWeight != 0.00))
-			{
-				System.out.println("Item can be bagged");
-			}
-			else if ((checkWeight == item.getWeight()) && (oldWeight == 0.00))
+			if ((checkWeight == item.getWeight()))
 			{
 				System.out.println("Item can be bagged");
 			}
