@@ -8,17 +8,18 @@ public class BanknoteSlotListenerSoftware implements BanknoteSlotListener {
 
     @Override
     public void banknoteInserted(BanknoteSlot slot) {
+        System.out.println("Banknote has been inserted");
 
     }
 
     @Override
     public void banknoteEjected(BanknoteSlot slot) {
-
+        System.out.println("Banknote has been ejected");
     }
 
     @Override
     public void banknoteRemoved(BanknoteSlot slot) {
-
+        System.out.println("Dangling banknote has been removed");
     }
 
     @Override
