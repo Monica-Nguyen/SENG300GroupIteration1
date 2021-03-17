@@ -11,4 +11,8 @@ public class ScanItemTest {
         BarcodedItem barcoded = new BarcodedItem(null, 0.0);
     }
 
+
+
+
+
 }
