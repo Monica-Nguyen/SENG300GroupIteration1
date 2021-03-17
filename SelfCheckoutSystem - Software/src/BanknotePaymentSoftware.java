@@ -11,14 +11,9 @@ import org.lsmr.selfcheckout.devices.listeners.*;
 import java.util.Currency;
 
 
-public class BankNotePaymentListener implements BanknoteDispenserListener, BanknoteSlotListener, BanknoteValidatorListener, BanknoteStorageUnitListener {
-	/**
-	 * Announces that the indicated banknote dispenser is full of banknotes.
-	 * 
-	 * @param dispenser
-	 *             The dispenser where the event occurred.
-	 */
-	
+public class BanknotePaymentSoftware implements BanknoteDispenserListener, BanknoteSlotListener, BanknoteValidatorListener, BanknoteStorageUnitListener {
+
+	@Override
 	public void banknotesFull(BanknoteDispenser dispenser)
 	{
 		if(dispenser.size() > 1000)
@@ -27,12 +22,8 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 
-	/**
-	 * Announces that the indicated banknote dispenser is empty of banknotes.
-	 * 
-	 * @param dispenser
-	 *             The dispenser where the event occurred.
-	 */
+
+	@Override
 	public void banknotesEmpty(BanknoteDispenser dispenser)
 	{
 		if(dispenser.size() == 0)
@@ -41,14 +32,8 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 
-	/**
-	 * Announces that the indicated banknote has been added to the indicated banknote dispenser.
-	 * 
-	 * @param dispenser
-	 *             The dispenser where the event occurred.
-	 * @param banknote
-	 *             The banknote that was added.
-	 */
+
+	@Override
 	public void banknoteAdded(BanknoteDispenser dispenser, Banknote banknote)
 	{
 		if(banknote.getValue() > 0)
@@ -57,14 +42,8 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 
-	/**
-	 * Announces that the indicated banknote has been added to the indicated banknote dispenser.
-	 * 
-	 * @param dispenser
-	 *             The dispenser where the event occurred.
-	 * @param banknote
-	 *             The banknote that was removed.
-	 */
+
+	@Override
 	public void banknoteRemoved(BanknoteDispenser dispenser, Banknote banknote)
 	{
 		if(banknote.getValue() > 0)
@@ -74,15 +53,8 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 	
-	/**
-	 * Announces that the indicated sequence of banknotes has been added to the
-	 * indicated banknote dispenser. Used to simulate direct, physical loading of the dispenser.
-	 * 
-	 * @param dispenser
-	 *              The dispenser where the event occurred.
-	 * @param banknotes
-	 *              The banknotes that were loaded.
-	 */
+
+	@Override
 	public void banknotesLoaded(BanknoteDispenser dispenser, Banknote... banknotes)
 	{
 		if(banknotes.length <= 0)
@@ -96,15 +68,8 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 
-	/**
-	 * Announces that the indicated sequence of banknotes has been removed to the
-	 * indicated banknote dispenser. Used to simulate direct, physical unloading of the dispenser.
-	 * 
-	 * @param dispenser
-	 *              The dispenser where the event occurred.
-	 * @param banknotes
-	 *              The banknotes that were unloaded.
-	 */
+
+	@Override
 	public void banknotesUnloaded(BanknoteDispenser dispenser, Banknote... banknotes) 
 	{
 		if(banknotes.length <= 0)
@@ -118,65 +83,38 @@ public class BankNotePaymentListener implements BanknoteDispenserListener, Bankn
 		}
 	}
 	
-	/**
-	 * An event announcing that a banknote has been inserted.
-	 * 
-	 * @param slot
-	 *            The device on which the event occurred.
-	 */
+
+	@Override
 	public void banknoteInserted(BanknoteSlot slot)
 	{
 		System.out.println("Banknote has been inserted");
 	}
 
-	/**
-	 * An event announcing that a banknote has been returned to the user, dangling
-	 * from the slot.
-	 * 
-	 * @param slot
-	 *            The device on which the event occurred.
-	 */
+
+	@Override
 	public void banknoteEjected(BanknoteSlot slot)
 	{
 		System.out.println("Banknote has been ejected");
 
 	}
 
-	/**
-	 * An event announcing that a dangling banknote has been removed by the user.
-	 * 
-	 * @param slot
-	 *            The device on which the event occurred.
-	 */
+
+	@Override
 	public void banknoteRemoved(BanknoteSlot slot)
 	{
 		System.out.println("Dangling banknote has been removed");
 
 	}
 	
-	/**
-	 * An event announcing that the indicated banknote has been detected and
-	 * determined to be valid.
-	 * 
-	 * @param validator
-	 *            The device on which the event occurred.
-	 * @param currency
-	 *            The kind of currency of the inserted banknote.
-	 * @param value
-	 *            The value of the inserted banknote.
-	 */
+
+	@Override
 	public void validBanknoteDetected(BanknoteValidator validator, Currency currency, int value)
 	{
 		System.out.println("Valid banknote detected - currency: " + currency + "   value: "+ value);
 	}
 
-	/**
-	 * An event announcing that the indicated banknote has been detected and
-	 * determined to be invalid.
-	 * 
-	 * @param validator
-	 *            The device on which the event occurred.
-	 */
+
+	@Override
 	public void invalidBanknoteDetected(BanknoteValidator validator)
 	{
 		System.out.println("Invalid banknote detected");
