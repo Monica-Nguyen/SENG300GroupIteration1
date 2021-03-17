@@ -82,12 +82,13 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
+
 		if(bnps.getStore())
 			System.out.println("Banknote storage successful");
 		else
 			System.out.println("Banknote storage unsuccessful");
 
-		bnps.toggleStored();			// Banknote stored, reset store parameter.
+		bnps.toggleStored();			// Banknote stored, reset getStore boolean parameter.
 
 
 	}

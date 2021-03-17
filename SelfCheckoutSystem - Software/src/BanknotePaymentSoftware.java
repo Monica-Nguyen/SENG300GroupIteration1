@@ -173,10 +173,11 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 
 	@Override
 	public void banknotesFull(BanknoteStorageUnit unit) {
-		if(unit.getCapacity() > 1000)
+		if(unit.getBanknoteCount() >= 1000)
 		{
 			System.out.println("Banknote Storage Unit is full of banknotes (>1000)");
 		}
+
 		suIsFull = true;
 	}
 
