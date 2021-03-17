@@ -5,12 +5,12 @@ import org.lsmr.selfcheckout.devices.listeners.BanknoteSlotListener;
 
 public class BanknoteSlotListenerSoftware implements BanknoteSlotListener {
 
-
     @Override
     public void banknoteInserted(BanknoteSlot slot) {
         System.out.println("Banknote has been inserted");
-
     }
+
+
 
     @Override
     public void banknoteEjected(BanknoteSlot slot) {

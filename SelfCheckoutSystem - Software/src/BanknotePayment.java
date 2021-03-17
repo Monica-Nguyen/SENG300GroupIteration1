@@ -40,6 +40,7 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
+		System.out.println("Banknote accepted");
 		
 		// Try to validate the banknote
 		try {
@@ -48,8 +49,8 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
-		
-		
+
+
 		// Try to store the banknote
 		try {
 			station.banknoteStorage.accept(bnote);
