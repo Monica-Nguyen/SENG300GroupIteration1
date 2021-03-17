@@ -1,3 +1,5 @@
+package org.lsmr.selfcheckoutsoftware;
+
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.CoinSlot;
@@ -15,11 +17,13 @@ public class CoinListenerSoftware implements CoinSlotListener, CoinValidatorList
     private boolean insertCoin;
     private Coin coin;
     private boolean validCoin;
+    private boolean addCoin;
 
     public CoinListenerSoftware(){
 
         this.insertCoin= false;
         this.validCoin = false;
+        this.addCoin = false;
 
     }
 
@@ -48,7 +52,7 @@ public class CoinListenerSoftware implements CoinSlotListener, CoinValidatorList
 
     @Override
     public void coinAdded(CoinStorageUnit unit) {
-
+        addCoin = true;
         System.out.println("Coin has been added");
     }
 
@@ -75,5 +79,22 @@ public class CoinListenerSoftware implements CoinSlotListener, CoinValidatorList
 
         System.out.println("Coin is invalid");
 
+    }
+
+    public boolean isInsertCoin() {
+        return insertCoin;
+    }
+
+
+    public Coin getCoin() {
+        return coin;
+    }
+
+    public boolean isValidCoin() {
+        return validCoin;
+    }
+
+    public boolean isAddCoin() {
+        return addCoin;
     }
 }

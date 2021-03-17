@@ -1,3 +1,5 @@
+package org.lsmr.selfcheckoutsoftware;
+
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.ElectronicScale;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
