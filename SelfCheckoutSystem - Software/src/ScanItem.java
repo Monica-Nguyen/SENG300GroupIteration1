@@ -13,7 +13,7 @@ public class ScanItem {
 
     */
 
-    // We will make many different selfCheckoutStations?
+    // Will we make many different selfCheckoutStations?
     private SelfCheckoutStation station;
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
     private Barcode barcode;
@@ -25,44 +25,31 @@ public class ScanItem {
     public ScanItem(SelfCheckoutStation s, BarcodeScannerListenerSoftware bsl){
         this.station = s;
         this.BarcodeScannerListener = bsl;
-
-        try{
-            station.mainScanner.register(BarcodeScannerListener);
-            scanDevice = 1;
-        }
-        // If we cannot register the main scanner, we should try the handheld next
-        catch(Exception e){
-            System.out.println("Main scanner could not be registered");
-            station.handheldScanner.register(BarcodeScannerListener);
-            scanDevice = 2;
-        }
+        station.mainScanner.register(BarcodeScannerListener);
+        station.handheldScanner.register(BarcodeScannerListener);
     }
 
-    public void scanningItem(BarcodedItem barcodedItem){
+    public void scanningItem(BarcodedItem barcodedItem, Boolean mainScanner){
         // if (state == 1){}?
 
         if (barcodedItem == null){
             throw new SimulationException(new NullPointerException("barcode is null"));
         }
 
-        if(scanDevice == 1){
+        if(mainScanner){
             station.mainScanner.scan(barcodedItem);
-            barcode = barcodedItem.getBarcode();
-            scannedItems.add(barcode);
-            scanFlag = true;
         }
 
-        else if (scanDevice == 2){
+        else{
             station.handheldScanner.scan(barcodedItem);
-            barcode = barcodedItem.getBarcode();
-            scannedItems.add(barcode);
-            scanFlag = true;
         }
 
-        // After a successful scan is where BagItem calls ScanItem when the flag == true?
-        if (scanFlag){
+        if(BarcodeScannerListener.getScanned()) {
+            barcode = barcodedItem.getBarcode();
+            scannedItems.add(barcode);
             System.out.println("Barcode was added to a list.");
         }
+
         else{
             System.out.println("Barcode was not added to a list.");
         }
