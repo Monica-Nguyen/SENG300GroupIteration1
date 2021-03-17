@@ -11,6 +11,11 @@ public class ElectronicScaleListenerSoftware implements ElectronicScaleListener 
         this.prevWeight = 0;
     }
 
+    public double getPrevWeight()
+    {
+        return this.prevWeight;
+    }
+
     @Override
     public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
 
