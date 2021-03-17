@@ -1,7 +1,7 @@
 package org.lsmr.selfcheckout;
 
 import org.lsmr.selfcheckout.devices.SimulationException;
-import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.Product;
 
 /**
  * Represents items for sale, each with a particular barcode and weight.

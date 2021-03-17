@@ -18,7 +18,7 @@ public class ScanItem {
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
     private Barcode barcode;
     private int scanDevice;
-    List<Barcode> scannedItems = new ArrayList<>();
+    List<Barcode> scannedItemsCart = new ArrayList<>();
     boolean scanFlag = false;
 
     // Scan item
@@ -46,13 +46,19 @@ public class ScanItem {
 
         if(BarcodeScannerListener.getScanned()) {
             barcode = barcodedItem.getBarcode();
-            scannedItems.add(barcode);
+            // make a key with the barcode
+            // that key corresponds to an item from the productDatabases
+
+
+            scannedItemsCart.add(barcode);
             System.out.println("Barcode was added to a list.");
         }
 
         else{
             System.out.println("Barcode was not added to a list.");
         }
+
+        // state = 2;
 
     }
 
