@@ -35,6 +35,7 @@ public class Main {
 
 
     public Main(SelfCheckoutStation s, ElectronicScaleListenerSoftware e, BarcodeScannerListenerSoftware bsl){
+
         // CoinSlotListenerSoftware csl, CoinStorageUnitListenerSoftware csul, CoinTrayListenerSoftware ctl, CoinValidatorListenerSoftware cvl,
         // BanknoteSlotListenerSoftware bsl, BanknoteStorageUnitListenerSoftware bsul, BanknoteValidatorListenerSoftware bvl){
         this.station = s;

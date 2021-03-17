@@ -37,7 +37,7 @@ public class ScanItem {
     public void scanningItem(BarcodedItem barcodedItem, Boolean mainScanner){
         // if (state == 1){}?
 
-        if (barcodedItem == null){
+        if (barcodedItem.getBarcode() == null){
             throw new SimulationException(new NullPointerException("Barcode is null.\n"));
         }
 
