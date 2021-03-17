@@ -1,6 +1,7 @@
+package org.lsmr.selfcheckoutsoftware;
+
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.devices.*;
-import org.lsmr.selfcheckout.devices.listeners.BanknoteSlotListener;
 
 /*
  * Devices:

@@ -1,4 +1,4 @@
-
+package org.lsmr.selfcheckoutsoftware;
 
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.devices.*;
