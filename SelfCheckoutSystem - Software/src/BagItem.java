@@ -18,7 +18,7 @@ public class BagItem {
 		station.baggingArea.register(electListen);
 	}
 
-	public void baggingItem(ElectronicScale scale, Item item)
+	public void baggingItem(Item item)
 	{
 		if (item == null)
 		{
@@ -29,7 +29,11 @@ public class BagItem {
 			station.baggingArea.add(item);
 			double newWeight = electListen.getPrevWeight();
 			double checkWeight = newWeight - oldWeight;
-			if (checkWeight != newWeight)
+			if ((checkWeight != item.getWeight()) && (oldWeight != 0.00))
+			{
+				System.out.println("Item can be bagged");
+			}
+			else if ((checkWeight == item.getWeight()) && (oldWeight == 0.00))
 			{
 				System.out.println("Item can be bagged");
 			}
