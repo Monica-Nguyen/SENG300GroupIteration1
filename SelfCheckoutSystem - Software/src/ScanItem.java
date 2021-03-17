@@ -1,4 +1,3 @@
-import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
@@ -20,8 +19,6 @@ public class ScanItem {
     // Will we make many different selfCheckoutStations?
     private SelfCheckoutStation station;
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
-    private Barcode barcode;
-    private int scanDevice;
     List<BarcodedItem> scannedItemsCart = new ArrayList<>();
 
     boolean scanFlag = false;
