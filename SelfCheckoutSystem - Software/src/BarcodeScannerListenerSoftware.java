@@ -7,7 +7,7 @@ import org.lsmr.selfcheckout.devices.listeners.BarcodeScannerListener;
 public class BarcodeScannerListenerSoftware implements BarcodeScannerListener {
     @Override
     public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-        
+
     }
 
     @Override
