@@ -1,25 +1,44 @@
 import java.util.ArrayList;
 
-
+import org.lsmr.selfcheckout.Item;
+import org.lsmr.selfcheckout.devices.ElectronicScale;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
+import org.lsmr.selfcheckout.devices.SimulationException;
 
 public class BagItem {
 
 	private SelfCheckoutStation station;
-	public int maxWeight;
-	public int maxSensitivity;
+	private ElectronicScaleListenerSoftware electListen;
 	
 	
-	public BagItem(SelfCheckoutStation station)
+	public BagItem(SelfCheckoutStation s,ElectronicScaleListenerSoftware e)
 	{
-		this.station = station;
+		this.station = s;
+		this.electListen = e;
+		station.baggingArea.register(electListen);
 	}
-	
-	
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public void baggingItem(ElectronicScale scale, Item item)
+	{
+		if (item == null)
+		{
+			throw new SimulationException(new NullPointerException("item is null"));
+		}
+		else {
+			double oldWeight = electListen.getPrevWeight();
+			station.baggingArea.add(item);
+			double newWeight = electListen.getPrevWeight();
+			double checkWeight = newWeight - oldWeight;
+			if (checkWeight != newWeight)
+			{
+				System.out.println("Item can be bagged");
+			}
+			else
+			{
+				System.out.println("Item can not be bagged");
+			}
+		}
 	}
+
 
 }

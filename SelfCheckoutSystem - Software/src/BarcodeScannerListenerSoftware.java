@@ -1,4 +1,5 @@
 import org.lsmr.selfcheckout.Barcode;
+import org.lsmr.selfcheckout.Item;
 import org.lsmr.selfcheckout.devices.AbstractDevice;
 import org.lsmr.selfcheckout.devices.BarcodeScanner;
 import org.lsmr.selfcheckout.devices.listeners.AbstractDeviceListener;
@@ -7,6 +8,7 @@ import org.lsmr.selfcheckout.devices.listeners.BarcodeScannerListener;
 public class BarcodeScannerListenerSoftware implements BarcodeScannerListener {
 
     private boolean scanned;
+    private Item item;
 
     public BarcodeScannerListenerSoftware() {
         this.scanned = false;
