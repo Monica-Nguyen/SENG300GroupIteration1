@@ -1,12 +1,9 @@
-
-
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class ScanItem {
     /* If we have states:
@@ -19,60 +16,58 @@ public class ScanItem {
     // We will make many different selfCheckoutStations?
     private SelfCheckoutStation station;
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
-    private Boolean flag = false;
     private Barcode barcode;
     private int scanDevice;
     List<Barcode> scannedItems = new ArrayList<>();
+    boolean scanFlag = false;
 
 
     // Scan item
-    public ScanItem(SelfCheckoutStation s, BarcodeScannerListenerSoftware bi) {
+    public ScanItem(SelfCheckoutStation s, BarcodeScannerListenerSoftware bsl){
         this.station = s;
-        this.BarcodeScannerListener = bi;
+        this.BarcodeScannerListener = bsl;
 
-        // There can be either a main scanner used or a handheld scanner used
         try{
             station.mainScanner.register(BarcodeScannerListener);
             scanDevice = 1;
         }
+        // If we cannot register the main scanner, we should try the handheld next
         catch(Exception e){
             System.out.println("Main scanner could not be registered");
             station.handheldScanner.register(BarcodeScannerListener);
             scanDevice = 2;
         }
-
-
     }
 
     public void scanningItem(BarcodedItem barcodedItem){
+        // if state == 1?
+
         if (barcodedItem == null){
             throw new SimulationException(new NullPointerException("barcode is null"));
         }
 
-        if(scanDevice == 1){ //&& state = 1){ // First we want to try scanning the item with the main scanner
+        if(scanDevice == 1){
             station.mainScanner.scan(barcodedItem);
             barcode = barcodedItem.getBarcode();
             scannedItems.add(barcode);
-            flag = true;
-
+            scanFlag = true;
         }
 
-        else if (scanDevice == 2){ // If not we can try the handheld scanner present in many checkouts
+        else if (scanDevice == 2){
             station.handheldScanner.scan(barcodedItem);
             barcode = barcodedItem.getBarcode();
             scannedItems.add(barcode);
-            flag = true;
+            scanFlag = true;
         }
-    }
 
-    /*
-    if (flag){
         // I guess after a successful scan is where BagItem calls ScanItem when the flag == true?
+        if (scanFlag){
+            System.out.println("Barcode was added to a list.");
+        }
+        else{
+            System.out.println("Barcode was not added to a list.");
+        }
+
     }
-
-    */
-
-
-
 
 }
