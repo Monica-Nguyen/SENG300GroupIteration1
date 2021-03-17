@@ -2,8 +2,12 @@ import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
+import org.lsmr.selfcheckout.products.Product;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScanItem {
     /* If we have states:
@@ -18,7 +22,8 @@ public class ScanItem {
     private BarcodeScannerListenerSoftware BarcodeScannerListener;
     private Barcode barcode;
     private int scanDevice;
-    List<Barcode> scannedItems = new ArrayList<>();
+    List<BarcodedItem> scannedItemsCart = new ArrayList<>();
+
     boolean scanFlag = false;
 
     // Scan item
@@ -33,7 +38,7 @@ public class ScanItem {
         // if (state == 1){}?
 
         if (barcodedItem == null){
-            throw new SimulationException(new NullPointerException("barcode is null"));
+            throw new SimulationException(new NullPointerException("Barcode is null.\n"));
         }
 
         if(mainScanner){
@@ -45,14 +50,19 @@ public class ScanItem {
         }
 
         if(BarcodeScannerListener.getScanned()) {
-            barcode = barcodedItem.getBarcode();
-            scannedItems.add(barcode);
-            System.out.println("Barcode was added to a list.");
+            // Map<Product, Integer> thing = new HashMap<>();
+            // make a key with the barcode
+            // that key corresponds to an item from the productDatabases
+            scannedItemsCart.add(barcodedItem);
+            System.out.println("Barcode was added to a list.\n");
+            BarcodeScannerListener.setScanned(false);
         }
 
         else{
-            System.out.println("Barcode was not added to a list.");
+            System.out.println("Barcode could not be scanned.\n");
         }
+
+        // state = 2;
 
     }
 
