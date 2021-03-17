@@ -21,7 +21,6 @@ public class ScanItem {
     List<Barcode> scannedItems = new ArrayList<>();
     boolean scanFlag = false;
 
-
     // Scan item
     public ScanItem(SelfCheckoutStation s, BarcodeScannerListenerSoftware bsl){
         this.station = s;
@@ -40,7 +39,7 @@ public class ScanItem {
     }
 
     public void scanningItem(BarcodedItem barcodedItem){
-        // if state == 1?
+        // if (state == 1){}?
 
         if (barcodedItem == null){
             throw new SimulationException(new NullPointerException("barcode is null"));
@@ -60,7 +59,7 @@ public class ScanItem {
             scanFlag = true;
         }
 
-        // I guess after a successful scan is where BagItem calls ScanItem when the flag == true?
+        // After a successful scan is where BagItem calls ScanItem when the flag == true?
         if (scanFlag){
             System.out.println("Barcode was added to a list.");
         }
