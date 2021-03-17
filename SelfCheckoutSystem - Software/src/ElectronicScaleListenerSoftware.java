@@ -6,11 +6,9 @@ import org.lsmr.selfcheckout.devices.listeners.ElectronicScaleListener;
 public class ElectronicScaleListenerSoftware implements ElectronicScaleListener {
 
     private double prevWeight;
-    private int numOfItems;
 
     public ElectronicScaleListenerSoftware() {
         this.prevWeight = 0;
-        this.numOfItems = 0;
     }
 
     @Override
@@ -30,7 +28,6 @@ public class ElectronicScaleListenerSoftware implements ElectronicScaleListener 
         System.out.println("The weight of this item is: " + currentWeight + " grams");
 
         prevWeight = weightInGrams;
-        numOfItems += 1;
 
     }
 
