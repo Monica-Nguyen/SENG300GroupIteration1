@@ -1,11 +1,7 @@
 
 
 import org.lsmr.selfcheckout.Banknote;
-import org.lsmr.selfcheckout.devices.AbstractDevice;
-import org.lsmr.selfcheckout.devices.BanknoteDispenser;
-import org.lsmr.selfcheckout.devices.BanknoteSlot;
-import org.lsmr.selfcheckout.devices.BanknoteStorageUnit;
-import org.lsmr.selfcheckout.devices.BanknoteValidator;
+import org.lsmr.selfcheckout.devices.*;
 import org.lsmr.selfcheckout.devices.listeners.*;
 
 import java.util.Currency;
@@ -13,12 +9,37 @@ import java.util.Currency;
 
 public class BanknotePaymentSoftware implements BanknoteDispenserListener, BanknoteSlotListener, BanknoteValidatorListener, BanknoteStorageUnitListener {
 
+	private boolean banknoteInserted = false;
+	private boolean banknoteIsValid = false;
+	private boolean banknoteStored = false;
+	private boolean suIsFull = false;
+	public boolean getInserted()
+	{
+		return banknoteInserted;
+	}
+
+	public boolean getValidation()
+	{
+		return banknoteIsValid;
+	}
+
+	public boolean getStore()
+	{
+		return banknoteStored;
+	}
+	public boolean isFull()
+	{
+		return suIsFull;
+	}
+
+
 	@Override
 	public void banknotesFull(BanknoteDispenser dispenser)
 	{
 		if(dispenser.size() > 1000)
 		{
 			System.out.println("Banknote dispenser is full of banknotes (>1000)");
+
 		}
 	}
 
@@ -40,6 +61,9 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 		{
 			System.out.println("Banknote added -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
 		}
+		else{
+			System.out.println("ERROR: Adding banknote of value <= 0");
+		}
 	}
 
 
@@ -49,7 +73,9 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 		if(banknote.getValue() > 0)
 		{
 			System.out.println("Banknote added -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
-	
+		}
+		else{
+			System.out.println("ERROR: Removing banknote of value <= 0");
 		}
 	}
 	
@@ -59,7 +85,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	{
 		if(banknotes.length <= 0)
 		{
-			System.out.println("Loading length 0");
+			System.out.println("ERROR: Loading banknotes of length 0");
 		}
 		for(Banknote i : banknotes)
 		{
@@ -74,7 +100,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	{
 		if(banknotes.length <= 0)
 		{
-			System.out.println("Loading length 0");
+			System.out.println("ERROR: Unloading banknotes of length 0");
 		}
 		for(Banknote i : banknotes)
 		{
@@ -88,6 +114,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	public void banknoteInserted(BanknoteSlot slot)
 	{
 		System.out.println("Banknote has been inserted");
+		this.banknoteInserted = true;
 	}
 
 
@@ -95,7 +122,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	public void banknoteEjected(BanknoteSlot slot)
 	{
 		System.out.println("Banknote has been ejected");
-
+		banknoteInserted = false;
 	}
 
 
@@ -104,6 +131,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	{
 		System.out.println("Dangling banknote has been removed");
 
+
 	}
 	
 
@@ -111,6 +139,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	public void validBanknoteDetected(BanknoteValidator validator, Currency currency, int value)
 	{
 		System.out.println("Valid banknote detected - currency: " + currency + "   value: "+ value);
+		banknoteIsValid = true;
 	}
 
 
@@ -118,33 +147,25 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	public void invalidBanknoteDetected(BanknoteValidator validator)
 	{
 		System.out.println("Invalid banknote detected");
+		banknoteIsValid = false;
 
 	}
 
-	@Override
-	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void banknotesFull(BanknoteStorageUnit unit) {
 		if(unit.getCapacity() > 1000)
 		{
 			System.out.println("Banknote Storage Unit is full of banknotes (>1000)");
-		}		
+		}
+		suIsFull = true;
 	}
 
 	@Override
 	public void banknoteAdded(BanknoteStorageUnit unit) {
 		System.out.println("Banknote added to Storage Unit");
-		
+		banknoteStored = true;
 	}
 
 	@Override
@@ -155,7 +176,16 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void banknotesUnloaded(BanknoteStorageUnit unit) {
 		System.out.println("Banknote unloaded from Storage Unit");
-		
-		
+		suIsFull = false;
+	}
+
+	@Override
+	public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
+
+	}
+
+	@Override
+	public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
+
 	}
 }
