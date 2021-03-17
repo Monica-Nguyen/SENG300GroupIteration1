@@ -22,7 +22,7 @@ public class BanknotePayment {
 	public BanknotePayment(SelfCheckoutStation scs, BanknotePaymentSoftware paymentSoftware){
 		this.station = scs;
 		this.bnps = paymentSoftware;
-		
+
 	}
 	public void takeBanknotePayment(Banknote bnote)
 	{
@@ -43,10 +43,10 @@ public class BanknotePayment {
 			System.out.println("Disabled Exception");
 		}
 
-		if(bnps.getInserted())
-			System.out.println("Banknote insertion successful");
-		else
-			System.out.println("Banknote insertion unsuccessful");
+//		if(bnps.getInserted())
+//			System.out.println("Banknote insertion successful");
+//		else
+//			System.out.println("Banknote insertion unsuccessful");
 
 		// Try to validate the banknote
 		try {
@@ -56,10 +56,10 @@ public class BanknotePayment {
 			System.out.println("Disabled Exception");
 		}
 
-		if(bnps.getValidation())
-			System.out.println("Banknote validation successful");
-		else
-			System.out.println("Banknote validation unsuccessful");
+//		if(bnps.getValidation())
+//			System.out.println("Banknote validation successful");
+//		else
+//			System.out.println("Banknote validation unsuccessful");
 
 		// Try to store the banknote
 		try {
@@ -71,11 +71,10 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
-
-		if(bnps.getStore())
-			System.out.println("Banknote storage successful");
-		else
-			System.out.println("Banknote storage unsuccessful");
+//		if(bnps.getStore())
+//			System.out.println("Banknote storage successful");
+//		else
+//			System.out.println("Banknote storage unsuccessful");
 
 
 	}
