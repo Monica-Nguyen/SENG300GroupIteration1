@@ -13,9 +13,15 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	private boolean banknoteIsValid = false;
 	private boolean banknoteStored = false;
 	private boolean suIsFull = false;
+
 	public boolean getInserted()
 	{
 		return banknoteInserted;
+	}
+
+	public void toggleInserted()
+	{
+		banknoteInserted = false;
 	}
 
 	public boolean getValidation()
@@ -23,10 +29,22 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 		return banknoteIsValid;
 	}
 
+	public void toggleValidation()
+	{
+		banknoteIsValid = false;
+	}
+
+
 	public boolean getStore()
 	{
 		return banknoteStored;
 	}
+
+	public void toggleStored()
+	{
+		banknoteStored = false;
+	}
+
 	public boolean isFull()
 	{
 		return suIsFull;
@@ -155,10 +173,11 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 
 	@Override
 	public void banknotesFull(BanknoteStorageUnit unit) {
-		if(unit.getCapacity() > 1000)
+		if(unit.getBanknoteCount() >= 1000)
 		{
 			System.out.println("Banknote Storage Unit is full of banknotes (>1000)");
 		}
+
 		suIsFull = true;
 	}
 
