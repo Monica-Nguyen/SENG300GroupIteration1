@@ -1,3 +1,5 @@
+package Iteration1Tests;
+
 import java.util.Currency;
 import java.math.BigDecimal;
 
