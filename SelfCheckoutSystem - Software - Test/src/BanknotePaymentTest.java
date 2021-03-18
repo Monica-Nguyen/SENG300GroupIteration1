@@ -86,7 +86,7 @@ public class BanknotePaymentTest {
         Banknote bn = new Banknote(10, canadianDollars);
 
         t1.pay(bn, 100);
-        assertEquals(true, t1.getHasRemainder());
+        assertTrue(t1.getHasRemainder());
 
     }
 
@@ -99,7 +99,7 @@ public class BanknotePaymentTest {
         Banknote bn = new Banknote(10, canadianDollars);
         t1.pay(bn, 1);
 
-        assertEquals(true, t1.getNeedToDispenseChange());
+        assertTrue(t1.getNeedToDispenseChange());
     }
 
     //Test whether the banknote was successfully stored
@@ -111,13 +111,10 @@ public class BanknotePaymentTest {
         Banknote bn = new Banknote(10, canadianDollars);
         t1.pay(bn, 1);
 
-        assertEquals(true, t1.getSuccessfulStorage());
+        assertTrue(t1.getSuccessfulStorage());
     }
 
 
-
-//    @Test
-//    void
 
 
 
