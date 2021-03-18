@@ -8,5 +8,7 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit:junit:4.13.2" level="project" />
+    <orderEntry type="module" module-name="SelfCheckoutSystem - Hardware - v1.2.zip_expanded" />
+    <orderEntry type="module" module-name="SelfCheckoutSystem - Software" />
   </component>
 </module>
