@@ -16,8 +16,20 @@ public class CoinPayment {
     MathContext m = new MathContext(1); // 4 precision
     private boolean insertCoin = false;
     private Coin coin2;
+
+    public boolean isValidCoin() {
+        return validCoin;
+    }
+
     private boolean validCoin = false;
     private boolean addCoin = false;
+
+    public boolean isFull() {
+        return full;
+    }
+
+    int counter = 0;
+
     private boolean full = false;
     BigDecimal totalPaid = BigDecimal.valueOf(0.00).round(m);
 
@@ -74,7 +86,7 @@ public class CoinPayment {
         station.coinStorage.register(new CoinStorageUnitListener() {
             @Override
             public void coinsFull(CoinStorageUnit unit) {
-                if(unit.getCoinCount()>unit.getCapacity()) {
+                if(unit.getCoinCount()>=unit.getCapacity()) {
                     full = true;
                     System.out.println("Coin storage is full");
                 }
@@ -93,30 +105,6 @@ public class CoinPayment {
 
             @Override
             public void coinsUnloaded(CoinStorageUnit unit) {
-
-            }
-
-            @Override
-            public void enabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-
-            }
-
-            @Override
-            public void disabled(AbstractDevice<? extends AbstractDeviceListener> device) {
-
-            }
-        });
-        station.coinTray.register(new CoinTrayListener() {
-            @Override
-            public void coinAdded(CoinTray tray) {
-                if (tray.hasSpace())
-                {
-                    System.out.println("Coin added");
-                }
-                else
-                {
-                    System.out.println("Coin not added");
-                }
             }
 
             @Override
@@ -132,7 +120,7 @@ public class CoinPayment {
     }
 
 
-    public void pay(Coin coin) throws DisabledException {
+    public void pay(Coin coin, CoinStorageUnit unit) throws DisabledException, OverloadException {
 
         int res = coin.getValue().compareTo(BigDecimal.ZERO);
         if(res == -1 || res == 0){
@@ -156,6 +144,7 @@ public class CoinPayment {
                     }
                     else
                     {
+                        unit.accept(coin);
                         System.out.println("Storage has space");
                         BigDecimal validatedCoin = coin.getValue().round(m);
                         totalPaid = totalPaid.add(validatedCoin).round(m);

@@ -1,3 +1,5 @@
+package Iteration1Tests;
+
 import org.junit.Test;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;

@@ -1,3 +1,4 @@
+package Iteration1Tests;
 
 import static org.junit.Assert.*;
 
@@ -49,7 +50,7 @@ public class BagItemTest {
 
     //BagItem b = new BagItem(station);
 
-    /*public BagItemTest()
+    /*public Iteration1Tests.BagItemTest()
     {
         SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
         BagItem bagItem = new BagItem(selfCheckoutStation, electListen);
