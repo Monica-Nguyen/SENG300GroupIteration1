@@ -20,6 +20,10 @@ public class BanknotePayment {
 	private SelfCheckoutStation station;
 	private BanknotePaymentSoftware bnps;
 
+	private int totalPaid = 0;
+	private boolean hasRemainder = false;
+	private boolean needToDispenseChange = false;
+	private boolean successfulStorage = true;
 	public BanknotePayment(SelfCheckoutStation scs, BanknotePaymentSoftware paymentSoftware){
 		this.station = scs;
 		this.bnps = paymentSoftware;
@@ -29,14 +33,16 @@ public class BanknotePayment {
 		station.banknoteValidator.register(bnps);
 
 	}
-	public void takeBanknotePayment(Banknote bnote)
+	public void pay(Banknote bnote, int total)
 	{
 
 		if(bnote == null)
 			throw new SimulationException(new NullPointerException("Banknote is null"));
 		if(bnote.getValue() <= 0)
 			throw new SimulationException("Banknote can't be value <= 0");
-		
+		if(total <= 0)
+			throw new SimulationException("Total need to pay cannot be <= 0!");
+
 		// Start by trying to accept an input of banknote
 		try {
 			station.banknoteInput.accept(bnote);
@@ -47,50 +53,53 @@ public class BanknotePayment {
 		{
 			System.out.println("Disabled Exception");
 		}
-
-		if(bnps.getInserted())
-			System.out.println("Banknote insertion successful");
-		else
-			System.out.println("Banknote insertion unsuccessful");
-
-		bnps.toggleInserted();			//banknoteSlot is now empty
-
-
-		// Try to validate the banknote
-		try {
-			station.banknoteValidator.accept(bnote);
-		} catch(DisabledException e)
-		{
-			System.out.println("Disabled Exception");
+		if(bnps.getStore()) {
+			System.out.print("\nStoring banknote of " + bnote.getValue() + " was successful\n");
+			totalPaid += bnote.getValue();
+			successfulStorage = true;
+			if(total - bnote.getValue() == 0)
+			{
+				hasRemainder = false;
+				needToDispenseChange = false;
+				System.out.println("Total of " + total + " was paid entirely");
+			}
+			else if(total - bnote.getValue() > 0)
+			{
+				hasRemainder = true;
+				System.out.println("Need to pay: " + (total - bnote.getValue()));
+			}
+			else if(total - bnote.getValue() < 0)
+			{
+				needToDispenseChange = true;
+				System.out.println("Dispense change: " + (bnote.getValue() - total));
+			}
 		}
-
-		if(bnps.getValidation())
-			System.out.println("Banknote validation successful");
-		else
-			System.out.println("Banknote validation unsuccessful");
-
-		bnps.toggleValidation();		//bankNoteValidator now empty
-
-
-		// Try to store the banknote
-		try {
-			station.banknoteStorage.accept(bnote);
-		} catch(OverloadException e)
-		{
-			System.out.println("Overload Exception");
-		} catch (DisabledException e) 
-		{
-			System.out.println("Disabled Exception");
+		else {
+			successfulStorage = false;
+			System.out.println("Storing banknote was unsuccessful");
 		}
-
-		if(bnps.getStore())
-			System.out.println("Banknote storage successful");
-		else
-			System.out.println("Banknote storage unsuccessful");
-
 		bnps.toggleStored();			// Banknote stored, reset getStore boolean parameter.
 
 
+
+		System.out.println("----------------");
+
 	}
+
+	public int getTotalPaid()
+	{
+		return totalPaid;
+	}
+	public boolean getHasRemainder() {
+		return hasRemainder;
+	}
+	public boolean getNeedToDispenseChange(){
+		return needToDispenseChange;
+	}
+	public boolean getSuccessfulStorage()
+	{
+		return successfulStorage;
+	}
+
 
 }
