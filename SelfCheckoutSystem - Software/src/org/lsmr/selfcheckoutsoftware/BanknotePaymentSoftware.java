@@ -77,7 +77,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	{
 		if(banknote.getValue() > 0)
 		{
-			System.out.println("Banknote added -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
+			System.out.println("Dispenser: Banknote added -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
 		}
 		else{
 			System.out.println("ERROR: Adding banknote of value <= 0");
@@ -90,7 +90,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	{
 		if(banknote.getValue() > 0)
 		{
-			System.out.println("Banknote added -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
+			System.out.println("Dispenser: Banknote removed -  value: " + banknote.getValue() + "  currency: " + banknote.getCurrency());
 		}
 		else{
 			System.out.println("ERROR: Removing banknote of value <= 0");
@@ -107,7 +107,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 		}
 		for(Banknote i : banknotes)
 		{
-			System.out.println("Banknote loaded -  value: " + i.getValue() + "  currency: " + i.getCurrency());
+			System.out.println("Dispenser: Banknote loaded -  value: " + i.getValue() + "  currency: " + i.getCurrency());
 
 		}
 	}
@@ -122,7 +122,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 		}
 		for(Banknote i : banknotes)
 		{
-			System.out.println("Banknote unloaded -  value: " + i.getValue() + "  currency: " + i.getCurrency());
+			System.out.println("Dispenser: Banknote unloaded -  value: " + i.getValue() + "  currency: " + i.getCurrency());
 
 		}
 	}
@@ -131,7 +131,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void banknoteInserted(BanknoteSlot slot)
 	{
-		System.out.println("Banknote has been inserted");
+		System.out.println("Slot: Banknote has been inserted");
 		this.banknoteInserted = true;
 	}
 
@@ -139,7 +139,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void banknoteEjected(BanknoteSlot slot)
 	{
-		System.out.println("Banknote has been ejected");
+		System.out.println("Slot: Banknote has been ejected");
 		banknoteInserted = false;
 	}
 
@@ -147,7 +147,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void banknoteRemoved(BanknoteSlot slot)
 	{
-		System.out.println("Dangling banknote has been removed");
+		System.out.println("Slot: Dangling banknote has been removed");
 
 
 	}
@@ -156,7 +156,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void validBanknoteDetected(BanknoteValidator validator, Currency currency, int value)
 	{
-		System.out.println("Valid banknote detected - currency: " + currency + "   value: "+ value);
+		System.out.println("Validator: Valid banknote detected - currency: " + currency + "   value: "+ value);
 		banknoteIsValid = true;
 	}
 
@@ -164,7 +164,7 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 	@Override
 	public void invalidBanknoteDetected(BanknoteValidator validator)
 	{
-		System.out.println("Invalid banknote detected");
+		System.out.println("Validator: Invalid banknote detected");
 		banknoteIsValid = false;
 
 	}
@@ -183,18 +183,18 @@ public class BanknotePaymentSoftware implements BanknoteDispenserListener, Bankn
 
 	@Override
 	public void banknoteAdded(BanknoteStorageUnit unit) {
-		System.out.println("Banknote added to Storage Unit");
+		System.out.println("SU: Banknote added to Storage Unit");
 		banknoteStored = true;
 	}
 
 	@Override
 	public void banknotesLoaded(BanknoteStorageUnit unit) {
-		System.out.println("Banknote loaded to Storage Unit");
+		System.out.println("SU: Banknote loaded to Storage Unit");
 	}
 
 	@Override
 	public void banknotesUnloaded(BanknoteStorageUnit unit) {
-		System.out.println("Banknote unloaded from Storage Unit");
+		System.out.println("SU: Banknote unloaded from Storage Unit");
 		suIsFull = false;
 	}
 
