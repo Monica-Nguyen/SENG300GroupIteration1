@@ -11,7 +11,7 @@ import org.lsmr.selfcheckoutsoftware.BanknotePaymentSoftware;
 import static org.junit.Assert.*;
 
 public class BanknotePaymentTest {
-
+//    Initialize SelfCheckoutSystem
     Currency canadianDollars = Currency.getInstance("CAD");
     BigDecimal nickel = new BigDecimal(0.05);
     BigDecimal dime = new BigDecimal(.1);
@@ -25,6 +25,8 @@ public class BanknotePaymentTest {
 
     SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
     BanknotePaymentSoftware software = new BanknotePaymentSoftware();
+
+    //Test with a normal banknote
     @Test
     public void testBankNote() {
 
@@ -34,7 +36,7 @@ public class BanknotePaymentTest {
         t1.pay(bn, 10);
 
     }
-
+    //Test with a null banknote
     @Test
     public void testNullNote()
     {
@@ -49,6 +51,7 @@ public class BanknotePaymentTest {
         }
     }
 
+    //Test with a zero valued banknote
     @Test
     public void testZeroValue()
     {
@@ -62,6 +65,7 @@ public class BanknotePaymentTest {
         }
     }
 
+    //Test total paid
     @Test
     public void testTotalPaid()
     {
@@ -73,6 +77,7 @@ public class BanknotePaymentTest {
         assertEquals(10, t1.getTotalPaid());
     }
 
+    //Test whether there are remainders
     @Test
     public void testHasRemainder()
     {
@@ -85,6 +90,7 @@ public class BanknotePaymentTest {
 
     }
 
+    //Test whether there is a need to dispense change
     @Test
     public void testNeedToDispenseChange()
     {
@@ -96,6 +102,7 @@ public class BanknotePaymentTest {
         assertEquals(true, t1.getNeedToDispenseChange());
     }
 
+    //Test whether the banknote was successfully stored
     @Test
     public void testSuccessfulStorage()
     {

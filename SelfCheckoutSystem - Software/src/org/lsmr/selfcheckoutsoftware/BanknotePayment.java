@@ -25,6 +25,7 @@ public class BanknotePayment {
 	private boolean hasRemainder = false;
 	private boolean needToDispenseChange = false;
 	private boolean successfulStorage = true;
+
 	public BanknotePayment(SelfCheckoutStation scs, BanknotePaymentSoftware paymentSoftware){
 		this.station = scs;
 		this.bnps = paymentSoftware;
@@ -34,6 +35,7 @@ public class BanknotePayment {
 		station.banknoteValidator.register(bnps);
 
 	}
+	//Paying with banknote and remaining total that needed to be paid
 	public void pay(Banknote bnote, int total)
 	{
 
