@@ -25,8 +25,8 @@ public class ScanItemTest {
     BigDecimal toonie = new BigDecimal(2.00);
     BigDecimal[] coinDenominations = {nickel, dime, quarter, loonie, toonie};
     int[] bankNoteDenominations = {5, 10, 20, 50, 100};
-    int scaleMaximumWeight = 100; // Assuming kilograms
-    int scaleSensitivity = 1; // In grams
+    int scaleMaximumWeight = 100;
+    int scaleSensitivity = 1;
 
     Barcode code = new Barcode("42");
     BarcodedItem bci;

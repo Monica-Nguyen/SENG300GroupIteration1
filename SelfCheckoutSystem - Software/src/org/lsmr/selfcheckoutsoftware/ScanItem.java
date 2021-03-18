@@ -72,6 +72,10 @@ public class ScanItem {
         //station.handheldScanner.register(BarcodeScannerListener);
     }
 
+    public boolean isScanned() {
+        return scanned;
+    }
+
     public void scanningItem(BarcodedItem barcodedItem){
         // if (state == 1){}?
 

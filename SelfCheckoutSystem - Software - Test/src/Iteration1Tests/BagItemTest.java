@@ -44,19 +44,9 @@ public class BagItemTest {
     BigDecimal toonie = new BigDecimal(2.00);
     BigDecimal[] coinDenominations = {nickel, dime, quarter, loonie, toonie};
     int[] bankNoteDenominations = {5, 10, 20, 50, 100};
-    int scaleMaximumWeight = 100; // Assuming kilograms
-    int scaleSensitivity = 1; // In grams
+    int scaleMaximumWeight = 100;
+    int scaleSensitivity = 1;
 
-
-    //BagItem b = new BagItem(station);
-
-    /*public Iteration1Tests.BagItemTest()
-    {
-        SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
-        BagItem bagItem = new BagItem(selfCheckoutStation, electListen);
-        Items x = null;
-        bagItem.baggingItem(x);
-    }*/
 
     @Test
     public void nullItem()
