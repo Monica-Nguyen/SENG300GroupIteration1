@@ -1,13 +1,16 @@
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Currency;
 import java.math.BigDecimal;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
+import org.lsmr.selfcheckoutsoftware.BanknotePayment;
+import org.lsmr.selfcheckoutsoftware.BanknotePaymentSoftware;
 
-class BanknotePaymentTest {
+import static org.junit.Assert.*;
+
+public class BanknotePaymentTest {
 
     Currency canadianDollars = Currency.getInstance("CAD");
     BigDecimal nickel = new BigDecimal(0.05);
@@ -23,7 +26,7 @@ class BanknotePaymentTest {
     SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
     BanknotePaymentSoftware software = new BanknotePaymentSoftware();
     @Test
-    void testBankNote() {
+    public void testBankNote() {
 
         Banknote bn = new Banknote(10, canadianDollars);
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation, software);
@@ -33,7 +36,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testNullNote()
+    public void testNullNote()
     {
         Banknote bn = null;
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation, software);
@@ -47,7 +50,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testZeroValue()
+    public void testZeroValue()
     {
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation, software);
         try {
@@ -60,7 +63,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testTotalPaid()
+    public void testTotalPaid()
     {
         SelfCheckoutStation selfCheckoutStation1 = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation1, software);
@@ -71,7 +74,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testHasRemainder()
+    public void testHasRemainder()
     {
         SelfCheckoutStation selfCheckoutStation1 = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation1, software);
@@ -83,7 +86,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testNeedToDispenseChange()
+    public void testNeedToDispenseChange()
     {
         SelfCheckoutStation selfCheckoutStation1 = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation1, software);
@@ -94,7 +97,7 @@ class BanknotePaymentTest {
     }
 
     @Test
-    void testSuccessfulStorage()
+    public void testSuccessfulStorage()
     {
         SelfCheckoutStation selfCheckoutStation1 = new SelfCheckoutStation(canadianDollars, bankNoteDenominations,coinDenominations, scaleMaximumWeight, scaleSensitivity);
         BanknotePayment t1 = new BanknotePayment(selfCheckoutStation1, software);
