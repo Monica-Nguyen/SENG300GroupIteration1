@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 
 public class CoinPayment {
 
-
     private SelfCheckoutStation station;
     private CoinSlot slot;
     private Coin coin;
@@ -33,6 +32,7 @@ public class CoinPayment {
 
         try{
             station.coinSlot.accept(coin);
+            cls.coinInserted(slot);
         }catch(DisabledException e){
             System.out.println("Disable Exception");
         }
@@ -68,6 +68,7 @@ public class CoinPayment {
         }else{
             System.out.println("Coin storage unsuccessful");
         }
+
 
     }
 
